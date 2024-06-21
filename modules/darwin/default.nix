@@ -9,15 +9,15 @@
     ];
     loginShell = pkgs.zsh;
     systemPackages = [ pkgs.coreutils ];
-    systemPath = [ "/opt/homebrew/bin" ];
-    pathsToLink = [ "/Applications" ];
+    # systemPath = [ "/opt/homebrew/bin" ];
+    # pathsToLink = [ "/Applications" ];
   };
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = false;
-  fonts.fontDir.enable = false; # Will not work with
+  fonts.fontDir.enable = false; # Will not work with Adobe CC Fonts
   fonts.packages = [
     (pkgs.nerdfonts.override {
       fonts = [
@@ -86,13 +86,13 @@
   time = {
     timeZone = "America/New_York";
   };
-  homebrew = {
-    enable = true;
-    caskArgs.no_quarantine = true;
-    global.brewfile = true;
-    masApps = { };
-    casks = [ "amethyst" ];
-    #taps = [ "" ];
-    #brews = [ "" ];
-  };
+#   homebrew = {
+#     enable = true;
+#     caskArgs.no_quarantine = true;
+#     global.brewfile = true;
+#     masApps = { };
+#     casks = [ "amethyst" ];
+#     #taps = [ "" ];
+#     #brews = [ "" ];
+#   };
 }

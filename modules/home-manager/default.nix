@@ -1,7 +1,7 @@
 { pkgs, pwnvim, ... }:
 {
   # Don't change this when you change package input. Leave it alone.
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
   # home-manager configs
   home.packages = with pkgs; [
     ripgrep
@@ -27,7 +27,7 @@
   programs.zsh.enableSyntaxHighlighting = true;
   programs.zsh.shellAliases = {
     ls = "ls --color=auto -laF";
-    nixswitch = "darwin-rebuild switch --flake ~/src/system-config/.#";
+    nixswitch = "darwin-rebuild switch --flake ~/Code/nix-system-config/.#";
     nixup = "pushd ~/Code/nix-system-config; nix flake update; nixswitch; popd";
   };
   programs.starship = {

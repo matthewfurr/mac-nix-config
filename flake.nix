@@ -1,7 +1,7 @@
 {
   description = "My MacOS Nix Config";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-23.11
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-24.05
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
