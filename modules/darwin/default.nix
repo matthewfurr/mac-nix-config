@@ -36,7 +36,7 @@
   system = {
     defaults = {
       dock = {
-        dock.autohide = true;
+        autohide = true;
         appswitcher-all-displays = true;
         launchanim = false;
         magnification = false;
