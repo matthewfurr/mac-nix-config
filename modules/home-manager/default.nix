@@ -1,7 +1,8 @@
-{ pkgs, pwnvim, ... }: {
+{ pkgs, pwnvim, ... }:
+{
   # Don't change this when you change package input. Leave it alone.
-  home.stateVersion = "22.11";
-  # specify my home-manager configs
+  home.stateVersion = "23.11";
+  # home-manager configs
   home.packages = with pkgs; [
     ripgrep
     fd
@@ -25,16 +26,26 @@
   programs.zsh.enableAutosuggestions = true;
   programs.zsh.enableSyntaxHighlighting = true;
   programs.zsh.shellAliases = {
-    ls = "ls --color=auto -F";
+    ls = "ls --color=auto -laF";
     nixswitch = "darwin-rebuild switch --flake ~/src/system-config/.#";
-    nixup = "pushd ~/src/system-config; nix flake update; nixswitch; popd";
+    nixup = "pushd ~/Code/nix-system-config; nix flake update; nixswitch; popd";
   };
-  programs.starship.enable = true;
-  programs.starship.enableZshIntegration = true;
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = false;
+      scan_timeout = 10;
+      character = {
+        success_symbol = "➜";
+        error_symbol = "➜";
+      };
+    };
+  };
   programs.alacritty = {
     enable = true;
-    settings.font.normal.family = "MesloLGS Nerd Font Mono";
-    settings.font.size = 16;
+    # settings.font.normal.family = "MesloLGS Nerd Font Mono";
+    # settings.font.size = 16;
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 }

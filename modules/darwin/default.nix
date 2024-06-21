@@ -1,8 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # here go the darwin preferences and config items
   programs.zsh.enable = true;
   environment = {
-    shells = with pkgs; [ bash zsh ];
+    shells = with pkgs; [
+      bash
+      zsh
+    ];
     loginShell = pkgs.zsh;
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
@@ -12,27 +16,83 @@
     experimental-features = nix-command flakes
   '';
   system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
-  fonts.fontDir.enable = true; # DANGER
-  fonts.fonts = [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
+  system.keyboard.remapCapsLockToEscape = false;
+  fonts.fontDir.enable = false; # Will not work with
+  fonts.packages = [
+    (pkgs.nerdfonts.override {
+      fonts = [
+        "Hack"
+        "IBMPlexMono"
+        "Iosevka"
+        "IosevkaTerm"
+        "IosevkaTermSlab"
+        "JetBrainsMono"
+        "Meslo"
+        "SourceCodePro"
+      ];
+    })
+  ];
   services.nix-daemon.enable = true;
-  system.defaults = {
-    finder.AppleShowAllExtensions = true;
-    finder._FXShowPosixPathInTitle = true;
-    dock.autohide = true;
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.InitialKeyRepeat = 14;
-    NSGlobalDomain.KeyRepeat = 1;
+  system = {
+    defaults = {
+      dock = {
+        dock.autohide = true;
+        appswitcher-all-displays = true;
+        launchanim = false;
+        magnification = false;
+        mineffect = "genie";
+        minimize-to-application = true;
+        mru-spaces = false;
+        orientation = "bottom";
+        # persistent-apps = [
+        #   [
+        #     "/Applications/Safari.app"
+        #     "/System/Applications/Utilities/Terminal.app"
+        #   ]
+        # ];
+        persistent-others = [ [ "~/Downloads" ] ];
+        show-process-indicators = true;
+        show-recents = false;
+        wvous-bl-corner = 2;
+        wvous-br-corner = 1;
+        wvous-tl-corner = 1;
+        wvous-tr-corner = 4;
+      };
+      finder = {
+        AppleShowAllExtensions = true;
+        FXDefaultSearchScope = "SCcf";
+        FXPreferredViewStyle = "Nlsv";
+        QuitMenuItem = true;
+        ShowPathbar = true;
+        ShowStatusBar = true;
+        _FXShowPosixPathInTitle = true;
+      };
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+        InitialKeyRepeat = 14;
+        KeyRepeat = 1;
+      };
+      spaces = {
+        spans-displays = true;
+      };
+
+    };
+    startup = {
+      chime = false;
+    };
+    # backwards compatible
+    stateVersion = 4;
   };
-  # backwards compat; don't change
-  system.stateVersion = 4;
+  time = {
+    timeZone = "America/New_York";
+  };
   homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    casks = [ "raycast" "amethyst" ];
-    taps = [ "fujiapple852/trippy" ];
-    brews = [ "trippy" ];
+    casks = [ "amethyst" ];
+    #taps = [ "" ];
+    #brews = [ "" ];
   };
 }
