@@ -1,5 +1,8 @@
-{ pkgs, pwnvim, ... }:
 {
+  pkgs,
+  pwnvim,
+  ...
+}: {
   # Don't change this when you change package input. Leave it alone.
   home.stateVersion = "24.05";
   # home-manager configs
@@ -19,12 +22,12 @@
   programs.bat.config.theme = "TwoDark";
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
-  programs.exa.enable = true;
+  programs.eza.enable = true;
   programs.git.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
-  programs.zsh.enableAutosuggestions = true;
-  programs.zsh.enableSyntaxHighlighting = true;
+  programs.zsh.autosuggestion.enable = true;
+  programs.zsh.syntaxHighlighting.enable = true;
   programs.zsh.shellAliases = {
     ls = "ls --color=auto -laF";
     nixswitch = "darwin-rebuild switch --flake ~/Code/nix-system-config/.#";
@@ -44,8 +47,8 @@
   };
   programs.alacritty = {
     enable = true;
-    # settings.font.normal.family = "MesloLGS Nerd Font Mono";
-    # settings.font.size = 16;
+    settings.font.normal.family = "MesloLGS Nerd Font Mono";
+    settings.font.size = 16;
   };
   home.file.".inputrc".source = ./dotfiles/inputrc;
 }
