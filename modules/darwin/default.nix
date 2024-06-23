@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  # here go the darwin preferences and config items
+{pkgs, ...}: {
+  # darwin preferences and config items
   programs.zsh.enable = true;
   environment = {
     shells = with pkgs; [
@@ -8,16 +7,13 @@
       zsh
     ];
     loginShell = pkgs.zsh;
-    systemPackages = [ pkgs.coreutils ];
-    # systemPath = [ "/opt/homebrew/bin" ];
-    # pathsToLink = [ "/Applications" ];
+    systemPackages = [pkgs.coreutils];
+    systemPath = ["/opt/homebrew/bin"];
+    pathsToLink = ["/Applications"];
   };
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = false;
-  fonts.fontDir.enable = false; # Will not work with Adobe CC Fonts
   fonts.packages = [
     (pkgs.nerdfonts.override {
       fonts = [
@@ -34,9 +30,11 @@
   ];
   services.nix-daemon.enable = true;
   system = {
+    keyboard.enableKeyMapping = true;
+    keyboard.remapCapsLockToEscape = false;
     defaults = {
       dock = {
-        autohide = true;
+        autohide = false;
         appswitcher-all-displays = true;
         launchanim = false;
         magnification = false;
@@ -50,7 +48,7 @@
         #     "/System/Applications/Utilities/Terminal.app"
         #   ]
         # ];
-        persistent-others = [ [ "~/Downloads" ] ];
+        # persistent-others = [ [ "~/Downloads" ] ];
         show-process-indicators = true;
         show-recents = false;
         wvous-bl-corner = 2;
@@ -75,7 +73,6 @@
       spaces = {
         spans-displays = true;
       };
-
     };
     startup = {
       chime = false;
@@ -86,13 +83,13 @@
   time = {
     timeZone = "America/New_York";
   };
-#   homebrew = {
-#     enable = true;
-#     caskArgs.no_quarantine = true;
-#     global.brewfile = true;
-#     masApps = { };
-#     casks = [ "amethyst" ];
-#     #taps = [ "" ];
-#     #brews = [ "" ];
-#   };
+  homebrew = {
+    enable = true;
+    caskArgs.no_quarantine = true;
+    global.brewfile = true;
+    masApps = {};
+    casks = ["amethyst" "kit"];
+    #taps = [ "" ];
+    #brews = [ "" ];
+  };
 }
