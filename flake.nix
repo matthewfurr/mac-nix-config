@@ -11,34 +11,33 @@
 
     pwnvim.url = "github:zmre/pwnvim";
   };
-  outputs =
-    inputs@{
-      nixpkgs,
-      home-manager,
-      darwin,
-      pwnvim,
-      ...
-    }:
-    {
-      darwinConfigurations = {
-        ESKMVL6YYF4621 = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          pkgs = import nixpkgs { system = "aarch64-darwin"; };
-          modules = [
-            ./modules/darwin
-            home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit pwnvim;
-                };
-                users.matthewfurr.imports = [ ./modules/home-manager ];
+  outputs = inputs @ {
+    nixpkgs,
+    home-manager,
+    darwin,
+    pwnvim,
+    ...
+  }: {
+    darwinConfigurations = {
+      ESKMVL6YYF4621 = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        pkgs = import nixpkgs {system = "aarch64-darwin";};
+        modules = [
+          ./modules/darwin
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit pwnvim;
               };
-            }
-          ];
-        };
+              users.matthewfurr.imports = [./modules/home-manager];
+            };
+            users.users.matthewfurr.home = "/Users/matthewfurr";
+          }
+        ];
       };
     };
+  };
 }
